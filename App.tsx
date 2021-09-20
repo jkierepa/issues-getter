@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react'
-import { StatusBar } from 'expo-status-bar'
-import fetchIssues from './src/api/fetchIssues'
 import { NavigationContainer } from '@react-navigation/native'
-
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { StatusBar } from 'expo-status-bar'
 import { createStackNavigator } from '@react-navigation/stack'
-import { RootStackParamList } from '@appTypes/navTypes'
+
+import { persistor, store } from '@store/store'
+
 import Home from '@screens/Home/Home'
 import Comments from '@screens/Comments/Comments'
+
+import fetchIssues from './src/api/fetchIssues'
+import { RootStackParamList } from '@appTypes/navTypes'
 
 const RootStack = createStackNavigator<RootStackParamList>()
 
@@ -25,12 +30,16 @@ export default function App () {
   }, [])
 
   return (
-    <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Home">
-        <RootStack.Screen name="Home" component={Home} />
-        <RootStack.Screen name="Comments" component={Comments} />
-      </RootStack.Navigator>
-      <StatusBar style="auto" />
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <RootStack.Navigator initialRouteName="Home">
+            <RootStack.Screen name="Home" component={Home} />
+            <RootStack.Screen name="Comments" component={Comments} />
+          </RootStack.Navigator>
+          <StatusBar style="auto" />
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   )
 }
