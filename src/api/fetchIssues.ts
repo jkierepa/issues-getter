@@ -1,10 +1,12 @@
 import octokit from './octokit'
 
-const fetchIssues = async (owner: string, repo: string) => {
+const fetchIssues = async (owner: string, repo: string, page: number = 1) => {
   const endpoint = `/repos/${owner}/${repo}/issues`
   const resp = await octokit.request(`GET ${endpoint}`, {
     owner: owner,
-    repo: repo
+    repo: repo,
+    page,
+    per_page: 20
   })
   return resp
 }
