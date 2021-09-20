@@ -15,7 +15,8 @@ module.exports = function (api) {
             '@appTypes': './src/appTypes',
             '@utils': './src/utils',
             '@screens': './src/screens',
-            '@containers': './src/containers'
+            '@containers': './src/containers',
+            '@api': './src/api'
           }
         }
       ],

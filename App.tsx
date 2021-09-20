@@ -10,7 +10,7 @@ import { persistor, store } from '@store/store'
 import Home from '@screens/Home/Home'
 import Comments from '@screens/Comments/Comments'
 
-import fetchIssues from './src/api/fetchIssues'
+import fetchIssues from '@api/fetchIssues'
 import { RootStackParamList } from '@appTypes/navTypes'
 
 const RootStack = createStackNavigator<RootStackParamList>()

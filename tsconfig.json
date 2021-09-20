@@ -13,6 +13,7 @@
       "@utils/*": ["./src/utils/*"],
       "@screens/*": ["./src/screens/*"],
       "@containers/*": ["./src/containers/*"],
+      "@api/*": ["./src/api/*"],
     }
   }
 }

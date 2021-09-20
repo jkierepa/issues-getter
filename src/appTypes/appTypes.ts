@@ -14,3 +14,8 @@ export type Issue = {
     body: string;
     state: string;
 }
+
+export type FetchPageParams = {
+    owner: string,
+    repo: string
+}
