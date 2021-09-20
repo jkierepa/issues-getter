@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
 import fetchIssues from './src/api/fetchIssues'
-import octokit from './src/api/octokit'
-import { GITHUB_AUTH_TOKEN } from 'react-native-dotenv'
+import { NavigationContainer } from '@react-navigation/native'
+
+import { createStackNavigator } from '@react-navigation/stack'
+import { RootStackParamList } from '@appTypes/navTypes'
+import Home from '@screens/Home/Home'
+import Comments from '@screens/Comments/Comments'
+
+const RootStack = createStackNavigator<RootStackParamList>()
 
 export default function App () {
   useEffect(() => {
@@ -20,18 +25,12 @@ export default function App () {
   }, [])
 
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <NavigationContainer>
+      <RootStack.Navigator initialRouteName="Home">
+        <RootStack.Screen name="Home" component={Home} />
+        <RootStack.Screen name="Comments" component={Comments} />
+      </RootStack.Navigator>
       <StatusBar style="auto" />
-    </View>
+    </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
