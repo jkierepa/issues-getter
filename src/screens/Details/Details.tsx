@@ -1,8 +1,14 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+
+import SafeArea from '@components/SafeArea/SafeArea'
+import DetailsContainer from '@containers/Details/DetailsContainer'
 
 const Details = (): React.ReactElement => {
-  return (<View><Text>{'Details'}</Text></View>)
+  return (
+    <SafeArea>
+      <DetailsContainer />
+    </SafeArea>
+  )
 }
 
 export default Details

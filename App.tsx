@@ -18,7 +18,7 @@ export default function App () {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
-          <RootStack.Navigator initialRouteName="Home">
+          <RootStack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
             <RootStack.Screen name="Home" component={Home} />
             <RootStack.Screen name="Details" component={Details} />
           </RootStack.Navigator>

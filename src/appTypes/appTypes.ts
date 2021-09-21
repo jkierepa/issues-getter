@@ -8,6 +8,10 @@ export type CommentedIssue = {
     comments: Comment[]
 }
 
+export type IssueComment = {
+    issueId: number;
+} & Comment
+
 export type Issue = {
     id: number;
     title: string;

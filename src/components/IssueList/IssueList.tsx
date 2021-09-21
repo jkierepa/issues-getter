@@ -1,37 +1,58 @@
-import { Issue } from '@appTypes/appTypes'
-import { RootStackParamList } from '@appTypes/navTypes'
-import IssueItem from '@components/IssueItem/IssueItem'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useState, useEffect } from 'react'
-import { View, FlatList, ListRenderItem } from 'react-native'
+import { View, FlatList, ListRenderItem, StyleSheet } from 'react-native'
 
-export type IssueListProps = {
-    issues: Issue[]
-    onEndReached(): void
-    onRefresh(): void
-}
+import IssueItem from '@components/IssueItem/IssueItem'
 
-const renderItem: ListRenderItem<Issue> = ({ item }) => <IssueItem id={item.id} title={item.title} state={item.state} body={item.body} createdAt={item.createdAt} onIssuePressed={() => console.log('pressed', item.id)}/>
+import { Issue } from '@appTypes/appTypes'
+import { IssueListProps } from '@appTypes/propTypes'
 
-const IssueList = ({ issues, onEndReached, onRefresh }: IssueListProps) => {
+const renderItem: ListRenderItem<Issue> = ({ item, index }) => (
+  <IssueItem id={item.id}
+    title={item.title}
+    state={item.state}
+    body={item.body}
+    createdAt={item.createdAt}
+    index={index}
+  />
+)
+
+const IssueList = ({ issues, onEndReached, onRefresh }: IssueListProps):React.ReactElement => {
   const [refreshing, setRefreshing] = useState<boolean>(false)
 
   useEffect(() => {
     setRefreshing(false)
   }, [issues])
 
-  return (<View style={{ justifyContent: 'center', alignItems: 'center' }}><FlatList
-    style={{ width: '90%' }}
+  return (
+  <View style={styles.container}>
+    <FlatList
+    style={styles.flatlist}
     data={issues}
     renderItem={renderItem}
-    keyExtractor={item => `${item.id}${item.title}`}
+    keyExtractor={item => item.id.toString()}
     onEndReached={() => onEndReached()}
     onRefresh={() => {
       setRefreshing(true)
       onRefresh()
     }}
     refreshing={refreshing}
-    /></View>)
+    ItemSeparatorComponent={() => <View style={styles.separator}/>}
+    />
+  </View>
+  )
 }
 
 export default IssueList
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  flatlist: {
+    width: '90%'
+  },
+  separator: {
+    height: 10
+  }
+})

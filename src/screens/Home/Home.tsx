@@ -1,35 +1,14 @@
-import { HomeScreenNavProps } from '@appTypes/navTypes'
-import IssueList from '@components/IssueList/IssueList'
-import { fetchIssuePage, resetIssues } from '@store/issues/slice'
-import { useAppDispatch, useAppSelector } from '@store/store'
-import React, { useEffect } from 'react'
-import { View, Text } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import React from 'react'
 
-const Home = ({ navigation }: HomeScreenNavProps): React.ReactElement => {
-  const dispatch = useAppDispatch()
-  const issues = useAppSelector(state => state.issues.issues)
+import HomeContainer from '@containers/Home/HomeContainer'
 
-  const fetchNext = () => {
-    dispatch(fetchIssuePage({ owner: 'facebook', repo: 'react-native' }))
-  }
+import SafeArea from '@components/SafeArea/SafeArea'
 
-  const refresh = () => {
-    dispatch(resetIssues())
-    dispatch(fetchIssuePage({ owner: 'facebook', repo: 'react-native' }))
-  }
-
-  useEffect(() => {
-    dispatch(fetchIssuePage({ owner: 'facebook', repo: 'react-native' }))
-  }, [])
-
+const Home = (): React.ReactElement => {
   return (
-  <SafeAreaView>
-    <View>
-      <Text>{'HOME'}</Text>
-      <IssueList issues={issues} onEndReached={() => fetchNext()} onRefresh={() => refresh()}/>
-    </View>
-  </SafeAreaView>)
+  <SafeArea>
+    <HomeContainer />
+  </SafeArea>)
 }
 
 export default Home
