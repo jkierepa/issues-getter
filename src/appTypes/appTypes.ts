@@ -13,6 +13,7 @@ export type Issue = {
     title: string;
     body: string;
     state: string;
+    createdAt: string;
 }
 
 export type FetchPageParams = {

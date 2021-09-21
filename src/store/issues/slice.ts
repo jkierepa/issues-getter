@@ -18,31 +18,44 @@ export const fetchIssuePage = createAsyncThunk('issues/fetchPage', async ({ owne
 export type IssuesState = {
     issues: Issue[]
     nextPage: number;
+    issueIds: number[]
 }
 
 export const initialState: IssuesState = {
   issues: [],
-  nextPage: 1
+  nextPage: 1,
+  issueIds: []
 }
 
 export const issuesSlice = createSlice({
   name: 'issues',
   initialState,
-  reducers: {},
+  reducers: {
+    resetIssues: (state) => {
+      state.issues = initialState.issues
+      state.nextPage = initialState.nextPage
+      state.issueIds = initialState.issueIds
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchIssuePage.fulfilled, (state, action: PayloadAction<any>) => {
       const issues = assertIssue(action.payload)
       if (issues) {
-        state.issues = [...state.issues, ...issues]
+        issues.forEach((iss) => {
+          if (!state.issueIds.includes(iss.id)) {
+            state.issueIds.push(iss.id)
+            state.issues.push(iss)
+          }
+        })
         state.nextPage = state.nextPage + 1
       }
     })
     builder.addCase(fetchIssuePage.rejected, (state, action: PayloadAction<unknown>) => {
       // TODO: change this
-      console.log(action.payload)
+      console.warn(action.payload)
     })
   }
 })
 
-// export const {} = issuesSlice.actions
+export const { resetIssues } = issuesSlice.actions
 export default issuesSlice.reducer
