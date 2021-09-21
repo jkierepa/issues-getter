@@ -26,6 +26,7 @@ const DetailsContainer = (): React.ReactElement => {
 
   const handleAddCommentPressed = () => {
     dispatch(addComment({ issueId: id, timestamp: new Date().getTime(), comment: text }))
+    setText('')
   }
 
   return (

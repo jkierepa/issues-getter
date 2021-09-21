@@ -4,7 +4,6 @@ const selectIssues = (issues: Issue[], phrase: string): Issue[] => {
   const searchMatches = issues.filter(issue => {
     const reg = new RegExp(`^${phrase}`, 'i')
     if (reg.test(issue.title)) {
-      console.log('here?')
       return issue
     }
     return null
