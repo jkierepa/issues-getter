@@ -16,10 +16,14 @@ export const commentsSlice = createSlice({
     addComment: (state, action: PayloadAction<IssueComment>) => {
       const target = state.commentedIssues.find((issue) => issue.issueId === action.payload.issueId)
       if (target) {
-        target.comments.push({ comment: action.payload.comment, timestamp: action.payload.timestamp })
+        if (action.payload.comment) {
+          target.comments.push({ comment: action.payload.comment, timestamp: action.payload.timestamp })
+        }
       } else {
-        const commIss: CommentedIssue = { issueId: action.payload.issueId, comments: [{ comment: action.payload.comment, timestamp: action.payload.timestamp }] }
-        state.commentedIssues.push(commIss)
+        if (action.payload.comment) {
+          const commIss: CommentedIssue = { issueId: action.payload.issueId, comments: [{ comment: action.payload.comment, timestamp: action.payload.timestamp }] }
+          state.commentedIssues.push(commIss)
+        }
       }
     }
   }

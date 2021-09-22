@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '@store/store'
+
 import { FetchPageParams, Issue } from '@appTypes/appTypes'
 import fetchIssues from '@api/fetchIssues'
-import { RootState } from '@store/store'
 import assertIssue from '@utils/assertIssue'
 
 export const fetchIssuePage = createAsyncThunk('issues/fetchPage', async ({ owner, repo }: FetchPageParams, { getState, rejectWithValue }) => {
@@ -40,7 +41,7 @@ export const issuesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchIssuePage.fulfilled, (state, action: PayloadAction<any>) => {
       const issues = assertIssue(action.payload)
-      if (issues) {
+      if (issues && issues?.length !== 0) {
         issues.forEach((iss) => {
           if (!state.issueIds.includes(iss.id)) {
             state.issueIds.push(iss.id)
