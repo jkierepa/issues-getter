@@ -14,15 +14,15 @@ This project fetches issues from public github repositories and allows user to b
 
 ### Install
 
+create `.env` file as per `.env.sample` and add your `GITHUB_AUTH_TOKEN`
+
+then 
+
 `npm install` and `npm start`
 
 or 
 
 `yarn` and `yarn start`
-
-then 
-
-create `.env` file as per `.env.sample` and add your `GITHUB_AUTH_TOKEN`
 
 ### Configure
 
