@@ -10,6 +10,10 @@ This project fetches issues from public github repositories and allows user to b
 - ability to **locally** comment on selected issues
 - searching through issues 
 
+### Developed with
+
+- expo and expo go on Android phone
+
 ## Getting started
 
 ### Install
