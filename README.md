@@ -6,7 +6,7 @@ This project fetches issues from public github repositories and allows user to b
 
 ### Features
 
-- 'infinatley' scrollable list of issues
+- *infinitely* scrollable list of issues
 - ability to **locally** comment on selected issues
 - searching through issues 
 
