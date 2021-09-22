@@ -18,7 +18,7 @@ This project fetches issues from public github repositories and allows user to b
 
 ### Install
 
-create `.env` file as per `.env.sample` and add your `GITHUB_AUTH_TOKEN`
+create `.env` file in root folder as per `.env.sample` and add your `GITHUB_AUTH_TOKEN`
 
 then 
 
