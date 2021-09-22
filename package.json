@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo/vector-icons": "^12.0.5",
     "@octokit/core": "^3.5.1",
     "@octokit/plugin-paginate-rest": "^2.16.3",
     "@react-native-async-storage/async-storage": "~1.15.0",

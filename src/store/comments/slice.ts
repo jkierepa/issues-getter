@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CommentedIssue, IssueComment } from '@appTypes/appTypes'
+import { CommentedIssue, IssueComment, IssueCommentIdentifier } from '@appTypes/appTypes'
 
 export type CommentsState = {
     commentedIssues: CommentedIssue[]
@@ -25,9 +25,16 @@ export const commentsSlice = createSlice({
           state.commentedIssues.push(commIss)
         }
       }
+    },
+    removeComment: (state, action: PayloadAction<IssueCommentIdentifier>) => {
+      const target = state.commentedIssues.find((issue) => issue.issueId === action.payload.issueId)
+      if (target && action.payload) {
+        const filtered = target.comments.filter((c) => c.timestamp !== action.payload.timestamp)
+        target.comments = filtered
+      }
     }
   }
 })
 
-export const { addComment } = commentsSlice.actions
+export const { addComment, removeComment } = commentsSlice.actions
 export default commentsSlice.reducer

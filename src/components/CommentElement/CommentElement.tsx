@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons'
 
 import { fontsizes } from '@theme/fontsizes'
 import { colors } from '@theme/colors'
 import getTimestampString from '@utils/getTimestampString'
 import { CommentProps } from '@appTypes/propTypes'
 
-const CommentElement = ({ comment, timestamp, index }: CommentProps): React.ReactElement => {
+const CommentElement = ({ comment, timestamp, index, onRemovePressed }: CommentProps): React.ReactElement => {
   const timestampString = getTimestampString(timestamp)
   const isReversed = Boolean(index && index % 2)
 
@@ -14,6 +15,7 @@ const CommentElement = ({ comment, timestamp, index }: CommentProps): React.Reac
     <View style={[styles.container, isReversed && styles.reverseBorders]}>
         <View style={styles.timestamp}>
           <Text style={styles.text}>{timestampString}</Text>
+          <FontAwesome name="remove" size={18} color={colors.foreground.reverse} onPress={() => onRemovePressed(timestamp)}/>
         </View>
         <Text style={styles.text}>{comment}</Text>
     </View>
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
   timestamp: {
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    justifyContent: 'space-between'
   },
   text: {
     fontSize: fontsizes.s,

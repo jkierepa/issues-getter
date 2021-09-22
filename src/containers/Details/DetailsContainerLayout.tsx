@@ -10,7 +10,7 @@ import { colors } from '@theme/colors'
 import { fontsizes } from '@theme/fontsizes'
 import getTimestampString from '@utils/getTimestampString'
 
-const DetailsContainerLayout = ({ comments, title, id, state, createdAt, body, setInput, input, onAddCommentPressed }: DetailsContainerLayoutProps): React.ReactElement => {
+const DetailsContainerLayout = ({ comments, title, id, state, createdAt, body, setInput, input, onAddCommentPressed, onRemovePressed }: DetailsContainerLayoutProps): React.ReactElement => {
   const [isPressed, setIsPressed] = useState<boolean>()
   const timestampString = getTimestampString(createdAt)
 
@@ -36,7 +36,7 @@ const DetailsContainerLayout = ({ comments, title, id, state, createdAt, body, s
                 </ScrollView>
                 <ScrollView style={styles.commentsScrollView}>
                 {comments.map((c, index) => (
-                    <CommentElement key={c.timestamp} timestamp={c.timestamp} comment={c.comment} index={index}/>
+                    <CommentElement key={c.timestamp} timestamp={c.timestamp} comment={c.comment} index={index} onRemovePressed={(ts) => onRemovePressed(id, ts)}/>
                 ))}
                 </ScrollView>
                 <TextInput value={input} onChange={(e) => setInput(e.nativeEvent.text)} placeholder={'Your comment...'} multiline={true} placeholderTextColor={colors.foreground.reverse} style={styles.input}/>

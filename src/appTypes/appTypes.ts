@@ -12,6 +12,11 @@ export type IssueComment = {
     issueId: number;
 } & Comment
 
+export type IssueCommentIdentifier = {
+    issueId: number;
+    timestamp: number;
+}
+
 export type Issue = {
     id: number;
     title: string;

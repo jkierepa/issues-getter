@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRoute } from '@react-navigation/native'
 
 import { useAppDispatch, useAppSelector } from '@store/store'
-import { addComment } from '@store/comments/slice'
+import { addComment, removeComment } from '@store/comments/slice'
 
 import { DetailsRouteParamsProps } from '@appTypes/navTypes'
 import { Comment } from '@appTypes/appTypes'
@@ -29,8 +29,23 @@ const DetailsContainer = (): React.ReactElement => {
     setText('')
   }
 
+  const handleRemovePressed = (issueId: number, timestamp: number) => {
+    dispatch(removeComment({ issueId, timestamp }))
+  }
+
   return (
-    <DetailsContainerLayout setInput={value => setText(value)} input={text} body={body} id={id} comments={comments} state={state} createdAt={createdAt} title={title} onAddCommentPressed={() => handleAddCommentPressed()}/>
+    <DetailsContainerLayout
+    setInput={value => setText(value)}
+    input={text}
+    body={body}
+    id={id}
+    comments={comments}
+    state={state}
+    createdAt={createdAt}
+    title={title}
+    onAddCommentPressed={() => handleAddCommentPressed()}
+    onRemovePressed={(id, ts) => handleRemovePressed(id, ts)}
+    />
   )
 }
 

@@ -29,9 +29,13 @@ export type DetailsContainerLayoutProps = {
     input: string;
     setInput(value: string): void;
     onAddCommentPressed(): void;
+    onRemovePressed(id: number, ts: number): void
 } & Issue
 
-export type CommentProps = {index: number} & Comment
+export type CommentProps = {
+    index: number;
+    onRemovePressed(ts: number): void;
+} & Comment
 
 export type SafeAreaProps = {
     children?: React.ReactNode
